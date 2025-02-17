@@ -38,14 +38,18 @@ public class CountrylanguageController {
     }
 
     //Actualitzar un country language
-    @PutMapping(path = "/{id}")
-    public Countrylanguage updateCountryLanguage(@RequestBody Countrylanguage countrylanguage, @PathVariable CountrylanguageId id){
+    @PutMapping(path = "/{countryCode}/{language}")
+    public Countrylanguage updateCountryLanguage(@RequestBody Countrylanguage countrylanguage, @PathVariable String countryCode, @PathVariable String language){
+        CountrylanguageId id = new CountrylanguageId(countryCode, language);
+
         return this.countrylanguageService.updateCountryLanguage(countrylanguage, id);
     }
 
     //Esborrar un countrylanguage
-    @DeleteMapping(path = "/{id}")
-    public String deleteCountryLanguage(@PathVariable CountrylanguageId id){
+    @DeleteMapping(path = "/{countryCode}/{language}")
+    public String deleteCountryLanguage(@PathVariable String countryCode, @PathVariable String language){
+        CountrylanguageId id = new CountrylanguageId(countryCode, language);
+
         boolean ok = this.countrylanguageService.deleteCountryLanguage(id);
 
         if(ok){
